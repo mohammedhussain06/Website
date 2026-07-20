@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Official Countdown for Mavs Dii | 🎂</title>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  
+  <!-- CSS Variables & Styling -->
+  <style>
+    :root {
+      /* Blossom Pink (Default Theme) */
+      --primary-glow: rgba(255, 105, 180, 0.4);
+      --accent: #ff69b4;
+      --accent-rgb: 255, 105, 180;
+      --bg-dark-start: #0f050c;
+      --bg-dark-end: #1f0b1a;
+      --text-main: #fff0f5;
+      --text-muted: #f3c6df;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --btn-glow: rgba(255, 105, 180, 0.5);
+      --btn-glow-strong: rgba(255, 105, 180, 0.8);
+      --cursor-glow: rgba(255, 105, 180, 0.7);
+    }
+
+    /* Vibe Themes */
+    [data-theme="pink"] {
+      --primary-glow: rgba(255, 105, 180, 0.4);
+      --accent: #ff69b4;
+      --accent-rgb: 255, 105, 180;
+      --bg-dark-start: #0f050c;
+      --bg-dark-end: #1f0b1a;
+      --text-main: #fff0f5;
+      --text-muted: #f3c6df;
+    }
+
+    [data-theme="blue"] {
+      --primary-glow: rgba(0, 191, 255, 0.35);
+      --accent: #00bfff;
+      --accent-rgb: 0, 191, 255;
+      --bg-dark-start: #020b14;
+      --bg-dark-end: #051c33;
+      --text-main: #f0f8ff;
+      --text-muted: #bfe3ff;
+    }
+
+    [data-theme="green"] {
+      --primary-glow: rgba(46, 204, 113, 0.35);
+      --accent: #2ecc71;
+      --accent-rgb: 46, 204, 113;
+      --bg-dark-start: #021208;
+      --bg-dark-end: #072412;
+      --text-main: #f2fbf5;
+      --text-muted: #bdeecf;
+    }
+
+    [data-theme="gold"] {
+      --primary-glow: rgba(241, 196, 15, 0.35);
+      --accent: #f1c40f;
+      --accent-rgb: 241, 196, 15;
+      --bg-dark-start: #120f02;
+      --bg-dark-end: #262005;
+      --text-main: #fffdf2;
+      --text-muted: #f9eca5;
+    }
+
+    [data-theme="slate"] {
+      --primary-glow: rgba(245, 246, 250, 0.25);
+      --accent: #f5f6fa;
+      --accent-rgb: 245, 246, 250;
+      --bg-dark-start: #0d0e12;
+      --bg-dark-end: #1b1c24;
+      --text-main: #ffffff;
+      --text-muted: #dcdde1;
+    }
+
+    /* Reset & Base Setup */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 50%, var(--bg-dark-end) 0%, var(--bg-dark-start) 70%);
+      font-family: 'Outfit', sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      padding: 40px 20px 100px;
+      transition: background 0.8s ease;
+    }
+
+    /* Particle Background Layer */
+    #background-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Custom Cursor Sparkles */
+    .sparkle-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      animation: fadeOutUp 0.8s forwards ease-out;
+    }
+    @keyframes fadeOutUp {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(1) translateY(0); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.3) translateY(-40px); }
+    }
+
+    /* Typography & Layout Header */
+    header {
+      text-align: center;
+      z-index: 10;
+      margin-bottom: 40px;
+    }
+
+    .header-chip {
+      display: inline-block;
+      padding: 6px 18px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 30px;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      box-shadow: 0 0 15px var(--primary-glow);
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      text-shadow: 0 0 20px var(--primary-glow);
+      margin-bottom: 10px;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    /* Vibe Selector Grid */
+    .vibe-picker {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 40px;
+      z-index: 10;
+    }
+
+    .vibe-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .vibe-btn:hover {
+      transform: scale(1.2);
+      border-color: #fff;
+    }
+
+    .vibe-btn.active {
+      transform: scale(1.15);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    .vibe-btn::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -35px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.8);
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      padding: 4px 8px;
+      font-size: 0.7rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s ease;
+    }
+
+    .vibe-btn:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* Countdown Grid Container */
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 800px;
+      width: 100%;
+      z-index: 10;
+      margin-bottom: 40px;
+      perspective: 1000px;
+    }
+
+    .time-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px 15px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      cursor: help;
+    }
+
+    .time-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 10px 40px var(--primary-glow);
+    }
+
+    .time-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent);
+      pointer-events: none;
+    }
+
+    .time-card .number {
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      font-weight: 800;
+      color: #fff;
+      display: block;
+      line-height: 1;
+      margin-bottom: 8px;
+      text-shadow: 0 0 15px rgba(255,255,255,0.2);
+      transition: transform 0.2s ease;
+    }
+
+    .time-card:hover .number {
+      color: var(--accent);
+      text-shadow: 0 0 25px var(--primary-glow);
+    }
+
+    .time-card .label {
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Tooltips on Countdown */
+    .time-card-tooltip {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: rgba(0, 0, 0, 0.9);
+      border: 1px solid var(--accent);
+      color: #fff;
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      border-radius: 8px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      z-index: 100;
+    }
+
+    .time-card:hover .time-card-tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Dynamic Tricks Area Container */
+    .tricks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+      max-width: 800px;
+      width: 100%;
+      z-index: 10;
+      margin-bottom: 40px;
+    }
+
+    .trick-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 30px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .trick-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trick-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    /* runaway button container style */
+    .button-trap-field {
+      width: 100%;
+      height: 100px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.15);
+      overflow: visible;
+    }
+
+    .runaway-btn {
+      position: absolute;
+      padding: 12px 28px;
+      border-radius: 40px;
+      background: linear-gradient(135deg, var(--accent), #fff);
+      border: none;
+      color: var(--bg-dark-start);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px var(--primary-glow);
+      transition: transform 0.15s cubic-bezier(0.1, 0.8, 0.3, 1);
+      z-index: 50;
+    }
+
+    /* slider customization */
+    .excitement-wrap {
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .excited-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.1);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .excited-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    .excited-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .excited-val {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      margin-top: 10px;
+      display: block;
+    }
+
+    /* Scratch Hint Reveal Game Container */
+    .gift-hint-panel {
+      grid-column: span 2;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 30px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 10;
+      max-width: 800px;
+      width: 100%;
+      position: relative;
+    }
+
+    .scratch-container {
+      width: 100%;
+      max-width: 450px;
+      height: 140px;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      margin-bottom: 15px;
+    }
+
+    .scratch-container:active {
+      cursor: grabbing;
+    }
+
+    .secret-message-box {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #fff;
+      z-index: 1;
+    }
+
+    .secret-hint-title {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 5px;
+    }
+
+    .secret-hint-text {
+      font-size: 1.15rem;
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    .scratch-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      touch-action: none;
+    }
+
+    .reset-scratch-btn {
+      padding: 8px 20px;
+      border-radius: 30px;
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .reset-scratch-btn:hover {
+      border-color: var(--accent);
+      color: #fff;
+      background: rgba(var(--accent-rgb), 0.1);
+    }
+
+    /* System Ticker Tape */
+    .system-logs {
+      max-width: 800px;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 10px 20px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 10;
+      margin-bottom: 40px;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);
+    }
+
+    .system-logs::before {
+      content: '●';
+      color: #ff3b30;
+      animation: blinkRed 1s infinite alternate;
+    }
+
+    @keyframes blinkRed {
+      0% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
+
+    /* Modal Overlay (Cheeky Prank alerts) */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-card {
+      background: #12131a;
+      border: 2px solid var(--accent);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 40px var(--primary-glow);
+      transform: scale(0.85);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: bounce 1.5s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .modal-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .modal-btn {
+      padding: 10px 30px;
+      border-radius: 30px;
+      border: none;
+      background: var(--accent);
+      color: var(--bg-dark-start);
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .modal-btn:hover {
+      box-shadow: 0 0 15px var(--accent);
+      transform: scale(1.05);
+    }
+
+
+
+    /* Mobile Responsive Settings */
+    @media (max-width: 768px) {
+      .countdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      .tricks-grid {
+        grid-template-columns: 1fr;
+      }
+      .gift-hint-panel {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body data-theme="pink">
+
+  <!-- Floating Star Canvas Background -->
+  <canvas id="background-canvas"></canvas>
+
+  <!-- Header -->
+  <header>
+    <div class="header-chip" data-aos="fade-down">✦ Birthday Countdown ✦</div>
+    <h1 data-aos="fade-down" data-aos-delay="100">Counting down for <span>Mavs Dii</span></h1>
+    <p class="subtitle" data-aos="fade-down" data-aos-delay="200">The clock is ticking. Prepare for the chaos (and cake) scheduled on 25th July! 🎂🎉</p>
+  </header>
+
+  <!-- Vibe Selector -->
+  <div class="vibe-picker" data-aos="fade-up">
+    <button class="vibe-btn active" style="background:#ff69b4;" data-theme="pink" data-tooltip="Blossom Pink" aria-label="Choose Pink Vibe"></button>
+    <button class="vibe-btn" style="background:#00bfff;" data-theme="blue" data-tooltip="Royal Blue" aria-label="Choose Blue Vibe"></button>
+    <button class="vibe-btn" style="background:#2ecc71;" data-theme="green" data-tooltip="Sage Mint" aria-label="Choose Green Vibe"></button>
+    <button class="vibe-btn" style="background:#f1c40f;" data-theme="gold" data-tooltip="Royal Amber" aria-label="Choose Gold Vibe"></button>
+    <button class="vibe-btn" style="background:#f5f6fa;" data-theme="slate" data-tooltip="Luxury Slate" aria-label="Choose Slate Vibe"></button>
+  </div>
+
+  <!-- Countdown Grid -->
+  <div class="countdown-grid">
+    <div class="time-card" data-tilt>
+      <span class="number" id="days">00</span>
+      <span class="label">Days</span>
+      <div class="time-card-tooltip">Days until the cake disappears! 🎂</div>
+    </div>
+    <div class="time-card" data-tilt>
+      <span class="number" id="hours">00</span>
+      <span class="label">Hours</span>
+      <div class="time-card-tooltip">Ticks of the clock, didi... tick, tick! ⏰</div>
+    </div>
+    <div class="time-card" data-tilt>
+      <span class="number" id="minutes">00</span>
+      <span class="label">Minutes</span>
+      <div class="time-card-tooltip">Minutes of pure anticipation... 📈</div>
+    </div>
+    <div class="time-card" data-tilt>
+      <span class="number" id="seconds">00</span>
+      <span class="label">Seconds</span>
+      <div class="time-card-tooltip">Seconds passing. Stop staring! 👀</div>
+    </div>
+  </div>
+
+  <!-- Tricks Grid -->
+  <div class="tricks-grid">
+    <!-- Trick 1: Speed Up Button -->
+    <div class="trick-panel">
+      <div class="trick-title">🕰️ Warp Speed Control</div>
+      <div class="trick-desc">Didi, are you tired of waiting? Try speeding up time so your birthday arrives immediately!</div>
+      <div class="button-trap-field" id="runaway-container">
+        <button class="runaway-btn" id="speed-up-btn">Speed Up ⚡</button>
+      </div>
+    </div>
+
+    <!-- Trick 2: Excitement Slider -->
+    <div class="trick-panel">
+      <div class="trick-title">🤩 Excitement Calibration</div>
+      <div class="trick-desc">Calibrate your excitement levels. Make sure you maintain optimal levels for maximum gifts.</div>
+      <div class="excitement-wrap">
+        <input type="range" class="excited-slider" id="excited-slider" min="0" max="100" value="100">
+        <span class="excited-val" id="excited-val">100%</span>
+      </div>
+    </div>
+
+    <!-- Trick 3: Scratch Prank Hints (Colspan 2) -->
+    <div class="gift-hint-panel">
+      <div class="trick-title">🎁 Reveal Gift Hint</div>
+      <div class="trick-desc">Want to know what Hussi got you? Hold click and scratch away the gray surface to reveal your exclusive hint!</div>
+      <div class="scratch-container" id="scratch-wrap">
+        <div class="secret-message-box">
+          <div class="secret-hint-title">Your Exclusive Hint 🌟</div>
+          <div class="secret-hint-text" id="secret-text">Fetching hint...</div>
+        </div>
+        <canvas class="scratch-canvas" id="scratch-canvas"></canvas>
+      </div>
+      <button class="reset-scratch-btn" id="scratch-reset">New Scratch Hint 🔄</button>
+    </div>
+  </div>
+
+  <!-- System Log Bar -->
+  <div class="system-logs">
+    <span id="log-text">Initializing countdown matrices...</span>
+  </div>
+
+  <!-- Modal Display -->
+  <div class="modal-overlay" id="hacker-modal">
+    <div class="modal-card">
+      <div class="modal-icon" id="modal-icon">😏</div>
+      <div class="modal-title" id="modal-title">Nice Try, Time Hacker!</div>
+      <div class="modal-text" id="modal-text">Time moves at exactly 1 second per second. Nice try trying to cheat, but you'll have to wait like everyone else. Go drink some tea! ☕</div>
+      <button class="modal-btn" id="modal-close">Back to Waiting</button>
+    </div>
+  </div>
+
+
+
+  <!-- JavaScript Modules -->
+  <script>
+    /* ============================================================
+       COUNTDOWN DATE CALCULATOR (July 25th)
+    ============================================================ */
+    const targetYear = new Date().getFullYear();
+    const targetDate = new Date(`July 25, ${targetYear} 00:00:00`).getTime();
+
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.querySelector('h1').innerHTML = "✨ It's Your Birthday <span>Mavs Dii</span>! 🥳";
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        return;
+      }
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = d.toString().padStart(2, '0');
+      document.getElementById('hours').textContent = h.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = m.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = s.toString().padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    /* ============================================================
+       DYNAMIC COLOR VIBES SETUP
+    ============================================================ */
+    const vibeButtons = document.querySelectorAll('.vibe-btn');
+    vibeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        vibeButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const theme = btn.getAttribute('data-theme');
+        document.body.setAttribute('data-theme', theme);
+        initThemedBackground(theme);
+      });
+    });
+
+    /* ============================================================
+       SPARKLE PARTICLES ON MOUSEMOVE
+    ============================================================ */
+    const themeSparkles = {
+      pink: ['✨', '🌸', '💖', '💗', '⭐'],
+      blue: ['✨', '💎', '💙', '🩵', '❄️'],
+      green: ['✨', '🌱', '🌿', '🍃', '🍀'],
+      gold: ['✨', '⭐', '🌻', '🟡', '💫'],
+      slate: ['✨', '⚪', '💎', '✴️', '⭐']
+    };
+
+    document.addEventListener('mousemove', (e) => {
+      const activeTheme = document.body.getAttribute('data-theme') || 'pink';
+      const sparkles = themeSparkles[activeTheme];
+      const selected = sparkles[Math.floor(Math.random() * sparkles.length)];
+
+      if (Math.random() < 0.12) {
+        const particle = document.createElement('span');
+        particle.className = 'sparkle-particle';
+        particle.style.left = e.clientX + 'px';
+        particle.style.top = e.clientY + 'px';
+        particle.style.fontSize = (Math.random() * 12 + 10) + 'px';
+        particle.textContent = selected;
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 800);
+      }
+    });
+
+    /* ============================================================
+       BACKGROUND CANVAS FLOATER ANIMATION
+    ============================================================ */
+    const canvas = document.getElementById('background-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    
+    function resizeCanvas() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const themeColors = {
+      pink: ['#ff69b4', '#ffb6c1', '#fbc2eb', '#e6a8d7'],
+      blue: ['#00bfff', '#87cefa', '#a6c0fe', '#96e6a1'],
+      green: ['#2ecc71', '#a3b19b', '#abecd6', '#e9f5ed'],
+      gold: ['#f1c40f', '#f9d976', '#fddb92', '#fbc02d'],
+      slate: ['#f5f6fa', '#dcdde1', '#e4e8f0', '#7f8c8d']
+    };
+
+    class Floater {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * W;
+        this.y = H + Math.random() * 100;
+        this.size = Math.random() * 3.5 + 0.8;
+        this.speed = Math.random() * 0.8 + 0.3;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        const theme = document.body.getAttribute('data-theme') || 'pink';
+        const colors = themeColors[theme];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.alpha = Math.random() * 0.4 + 0.15;
+      }
+      step() {
+        this.y -= this.speed;
+        this.x += this.vx;
+        if (this.y < -10) this.reset();
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    const floaters = Array.from({length: 45}, () => new Floater());
+
+    function loopBackground() {
+      ctx.clearRect(0, 0, W, H);
+      floaters.forEach(f => {
+        f.step();
+        f.draw();
+      });
+      requestAnimationFrame(loopBackground);
+    }
+    loopBackground();
+
+    function initThemedBackground(theme) {
+      floaters.forEach(f => {
+        const colors = themeColors[theme];
+        f.color = colors[Math.floor(Math.random() * colors.length)];
+      });
+    }
+
+    /* ============================================================
+       TRICK 1: RUNAWAY SPEED UP BUTTON
+    ============================================================ */
+    const btn = document.getElementById('speed-up-btn');
+    const container = document.getElementById('runaway-container');
+
+    container.addEventListener('mousemove', (e) => {
+      const btnRect = btn.getBoundingClientRect();
+      const conRect = container.getBoundingClientRect();
+      
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      
+      const btnCenterX = btnRect.left + btnRect.width / 2;
+      const btnCenterY = btnRect.top + btnRect.height / 2;
+
+      const dist = Math.hypot(mouseX - btnCenterX, mouseY - btnCenterY);
+
+      // If mouse is within 85px of the button center, run away!
+      if (dist < 85) {
+        const minX = 15;
+        const maxX = conRect.width - btnRect.width - 15;
+        const minY = 10;
+        const maxY = conRect.height - btnRect.height - 10;
+
+        const randomX = Math.floor(Math.random() * (maxX - minX) + minX);
+        const randomY = Math.floor(Math.random() * (maxY - minY) + minY);
+
+        btn.style.left = randomX + 'px';
+        btn.style.top = randomY + 'px';
+      }
+    });
+
+    // Reset button position when mouse leaves the container entirely
+    container.addEventListener('mouseleave', () => {
+      btn.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      btn.style.left = '50%';
+      btn.style.top = '50%';
+      btn.style.transform = 'translate(-50%, -50%)';
+      setTimeout(() => {
+        btn.style.transition = '';
+      }, 500);
+    });
+
+    const speedUpReplies = [
+      {
+        icon: "😏",
+        title: "Nice Try, Time Hacker!",
+        text: "You thought clicking a button could bend space-time? 🕰️ Time moves at exactly 1 second per second, Mavs Dii. Go drink some chai instead! ☕"
+      },
+      {
+        icon: "🤡",
+        title: "Error 404: Physics Broken",
+        text: "Einstein is crying in his grave right now. You can't speed up time! Go sit down and wait patiently like a good kid. 🤫"
+      },
+      {
+        icon: "🧐",
+        title: "Chilla Chilla Ke Scheme Bata De!",
+        text: "Hacking time is illegal in 195 countries! Your brother Hussi has notified the time police. Please step away from the button. 👮‍♂️"
+      },
+      {
+        icon: "🤐",
+        title: "Control, Mavs Dii, Control!",
+        text: "Patience is a virtue... which you clearly don't have today. 🚀 The countdown is un-hackable! Nice try though!"
+      },
+      {
+        icon: "🔥",
+        title: "Ye To Saala Dhokha hai!",
+        text: "You thought you found a shortcut to your birthday? Keep dreaming! Time is ticking at its own pace. 😂"
+      }
+    ];
+
+    const excitementReplies = [
+      {
+        icon: "😤",
+        title: "Excitement Level Critical!",
+        text: "Error: Excitement level dropped below 80%. Mavs Dii is officially required to maintain 100% excitement or higher at all times! Resetting to maximum! 🚀"
+      },
+      {
+        icon: "🤨",
+        title: "Aise Kaise Chalega Mavs Dii?",
+        text: "Gifts are proportional to excitement levels. Dropping below 80% will result in a penalty of receiving zero chocolate! Back to 100% you go! 🍫"
+      },
+      {
+        icon: "😱",
+        title: "Obsession Check Failed!",
+        text: "System detected low enthusiasm levels. Initiating emergency hype protocols! Excitement level forcibly restored to 100%. 📢"
+      },
+      {
+        icon: "🤫",
+        title: "Quietly Restoring Hype...",
+        text: "Hussi is watching! If he sees you dragging that slider down, he will replace your birthday cake with salad. Snapping back to 100%! 🥗"
+      }
+    ];
+
+    btn.addEventListener('click', () => {
+      const reply = speedUpReplies[Math.floor(Math.random() * speedUpReplies.length)];
+      showCheekyModal(reply.icon, reply.title, reply.text);
+    });
+
+    /* ============================================================
+       TRICK 2: EXCITEMENT CALIBRATION SLIDER
+    ============================================================ */
+    const slider = document.getElementById('excited-slider');
+    const valText = document.getElementById('excited-val');
+
+    slider.addEventListener('input', () => {
+      const val = parseInt(slider.value);
+      valText.textContent = val + '%';
+      
+      if (val < 80) {
+        slider.value = 100;
+        valText.textContent = '100%';
+        const reply = excitementReplies[Math.floor(Math.random() * excitementReplies.length)];
+        showCheekyModal(reply.icon, reply.title, reply.text);
+      }
+    });
+
+    /* ============================================================
+       TRICK 3: SCRATCH CARD GIFT HINTS GAME
+    ============================================================ */
+    const hints = [
+      "Kya karoge itni dhan rashi ka? 🤑",
+      "Paisa hi paisa hoga! 💸",
+      "Zor zor se bolke sabko scheme batade! 🤫",
+      "Aise kaise chalega Mavs Dii? 🤷",
+      "Bohot tej ho rahe ho, haan? 😏",
+      "Ye to saala dhokha hai! 🤡",
+      "A gorgeous box of premium imported fresh oxygen! 💨",
+      "5 days of Hussi tolerating all your scoldings without arguing! 🤐"
+    ];
+
+    let currentHintIndex = Math.floor(Math.random() * hints.length);
+    const scratchCanvas = document.getElementById('scratch-canvas');
+    const sCtx = scratchCanvas.getContext('2d');
+    const secretText = document.getElementById('secret-text');
+    let isDrawing = false;
+
+    function initScratchCard() {
+      // Set text
+      secretText.textContent = hints[currentHintIndex];
+      
+      // Configure canvas layout
+      const rect = scratchCanvas.getBoundingClientRect();
+      scratchCanvas.width = rect.width;
+      scratchCanvas.height = rect.height;
+
+      // Draw background overlay
+      sCtx.fillStyle = '#666';
+      sCtx.fillRect(0, 0, scratchCanvas.width, scratchCanvas.height);
+      
+      // Draw grid text pattern
+      sCtx.fillStyle = '#aaa';
+      sCtx.font = 'bold 13px Outfit';
+      sCtx.textAlign = 'center';
+      sCtx.fillText('SCRATCH TO REVEAL GIFT HINT', scratchCanvas.width / 2, scratchCanvas.height / 2 + 5);
+    }
+
+    // Call init when window loads and resized
+    window.addEventListener('load', initScratchCard);
+    window.addEventListener('resize', initScratchCard);
+
+    function scratch(e) {
+      if (!isDrawing) return;
+      const rect = scratchCanvas.getBoundingClientRect();
+      const x = (e.clientX || e.touches[0].clientX) - rect.left;
+      const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+      sCtx.globalCompositeOperation = 'destination-out';
+      sCtx.beginPath();
+      sCtx.arc(x, y, 18, 0, Math.PI * 2);
+      sCtx.fill();
+    }
+
+    scratchCanvas.addEventListener('mousedown', () => isDrawing = true);
+    scratchCanvas.addEventListener('mouseup', () => isDrawing = false);
+    scratchCanvas.addEventListener('mouseleave', () => isDrawing = false);
+    scratchCanvas.addEventListener('mousemove', scratch);
+
+    scratchCanvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
+    scratchCanvas.addEventListener('touchend', () => isDrawing = false);
+    scratchCanvas.addEventListener('touchmove', scratch);
+
+    // Reset card button
+    document.getElementById('scratch-reset').addEventListener('click', () => {
+      let newIndex = currentHintIndex;
+      while (newIndex === currentHintIndex) {
+        newIndex = Math.floor(Math.random() * hints.length);
+      }
+      currentHintIndex = newIndex;
+      initScratchCard();
+    });
+
+    /* ============================================================
+       SYSTEM LOG STATUS TICKER TAPE
+    ============================================================ */
+    const logs = [
+      "Calculating birthday candle count... (Warning: Wax overload alert) 🕯️",
+      "Verifying if didi grew taller... [FAILED] Still pocket-sized. 🤏",
+      "Pre-warming cake ovens to optimal sweetness levels... 🍰",
+      "Hiding presents in secret lockers from Hussi's radar... 🎁",
+      "Testing confetti dispersion matrices... [SUCCESS] 🎉",
+      "Aligning star constellations to coordinate wishes... ✨",
+      "Updating database values: 'patience' column set to NULL... 😂",
+      "Preparing 19-20 years of memories folder... 📂",
+      "Waking up the party balloons... 🎈"
+    ];
+    let logIndex = 0;
+    const logEl = document.getElementById('log-text');
+
+    async function typeLog(text) {
+      logEl.textContent = '';
+      for (const ch of text) {
+        logEl.textContent += ch;
+        await new Promise(r => setTimeout(r, 45));
+      }
+    }
+
+    async function cycleLogs() {
+      while (true) {
+        const text = `[SYSTEM] ${logs[logIndex]}`;
+        await typeLog(text);
+        await new Promise(r => setTimeout(r, 3200));
+        logIndex = (logIndex + 1) % logs.length;
+      }
+    }
+    cycleLogs();
+
+    /* ============================================================
+       CHEEKY MODAL SYSTEM
+    ============================================================ */
+    const modal = document.getElementById('hacker-modal');
+    const mIcon = document.getElementById('modal-icon');
+    const mTitle = document.getElementById('modal-title');
+    const mText = document.getElementById('modal-text');
+
+    function showCheekyModal(icon, title, desc) {
+      mIcon.textContent = icon;
+      mTitle.textContent = title;
+      mText.textContent = desc;
+      modal.classList.add('active');
+    }
+
+    document.getElementById('modal-close').addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+
+  </script>
+</body>
+</html>
