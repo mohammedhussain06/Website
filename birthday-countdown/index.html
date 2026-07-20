@@ -509,6 +509,27 @@
       background: rgba(var(--accent-rgb), 0.1);
     }
 
+    .reveal-song-btn {
+      padding: 12px 28px;
+      border-radius: 40px;
+      background: linear-gradient(135deg, var(--accent), #fff);
+      border: none;
+      color: var(--bg-dark-start);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px var(--primary-glow);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .reveal-song-btn:hover {
+      box-shadow: 0 0 20px var(--accent);
+      transform: scale(1.05);
+    }
+
     /* System Ticker Tape */
     .system-logs {
       max-width: 800px;
@@ -687,7 +708,7 @@
     <!-- Trick 1: Speed Up Button -->
     <div class="trick-panel">
       <div class="trick-title">🕰️ Warp Speed Control</div>
-      <div class="trick-desc">Didi, are you tired of waiting? Try speeding up time so your birthday arrives immediately!</div>
+      <div class="trick-desc">Mavs Dii, are you tired of waiting? Try speeding up time so your birthday arrives immediately!</div>
       <div class="button-trap-field" id="runaway-container">
         <button class="runaway-btn" id="speed-up-btn">Speed Up ⚡</button>
       </div>
@@ -703,7 +724,15 @@
       </div>
     </div>
 
-    <!-- Trick 3: Scratch Prank Hints (Colspan 2) -->
+    <!-- Trick 3: Sibling Song Dedication (Rickroll) -->
+    <div class="trick-panel">
+      <div class="trick-title">🎵 Sibling Song Dedication</div>
+      <div class="trick-desc">Hussi spent days composing a special, heartfelt acoustic melody dedicated to you. Click below to listen!</div>
+      <button class="reveal-song-btn" id="reveal-song-btn">Reveal & Play Song 🎶</button>
+      <audio id="rickroll-audio" src="rickroll.mp3" loop></audio>
+    </div>
+
+    <!-- Trick 4: Scratch Prank Hints (Colspan 2) -->
     <div class="gift-hint-panel">
       <div class="trick-title">🎁 Reveal Gift Hint</div>
       <div class="trick-desc">Want to know what Hussi got you? Hold click and scratch away the gray surface to reveal your exclusive hint!</div>
@@ -984,6 +1013,31 @@
     btn.addEventListener('click', () => {
       const reply = speedUpReplies[Math.floor(Math.random() * speedUpReplies.length)];
       showCheekyModal(reply.icon, reply.title, reply.text);
+    });
+
+    /* ============================================================
+       TRICK 4: RICKROLL SONG REVEAL
+    ============================================================ */
+    const revealBtn = document.getElementById('reveal-song-btn');
+    const rickrollAudio = document.getElementById('rickroll-audio');
+
+    revealBtn.addEventListener('click', () => {
+      if (rickrollAudio.paused) {
+        rickrollAudio.play().then(() => {
+          revealBtn.textContent = "Pause Rickroll 🔇";
+          revealBtn.style.background = "linear-gradient(135deg, #ff3b30, #ff6b6b)";
+          revealBtn.style.color = "#fff";
+          showCheekyModal("🕺", "You've Been Rickrolled!", "“Never gonna give you up, never gonna let you down...” 🎶\nHussi composing a serious, emotional song? Not in this universe, Mavs Dii! Enjoy the tune! 😂");
+        }).catch(err => {
+          console.warn("Audio playback blocked by user interaction requirements.", err);
+          showCheekyModal("🎵", "Audio Playback Blocked", "Your browser blocked background music auto-play. Make sure to allow audio playback permissions in your browser bar! 🎧");
+        });
+      } else {
+        rickrollAudio.pause();
+        revealBtn.textContent = "Reveal & Play Song 🎶";
+        revealBtn.style.background = "linear-gradient(135deg, var(--accent), #fff)";
+        revealBtn.style.color = "var(--bg-dark-start)";
+      }
     });
 
     /* ============================================================
